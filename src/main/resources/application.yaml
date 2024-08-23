@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: firstspringbatch
+  batch:
+    job:
+      enabled: true
+    jdbc:
+      table-prefix: MY
+      initialize-schema: always
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    custom:
+      jdbc-url: jdbc:mysql://localhost:3306/temp
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
