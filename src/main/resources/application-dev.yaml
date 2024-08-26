@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: firstspringbatch
+  config:
+    activate:
+      on-profile: dev
+  batch:
+    job:
+      enabled: false
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/temp

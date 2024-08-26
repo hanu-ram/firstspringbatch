@@ -1,11 +1,13 @@
 spring:
   application:
     name: firstspringbatch
+  profiles:
+    active: dev
   batch:
     job:
-      enabled: true
+      enabled: false
     jdbc:
-      table-prefix: MY
+      table-prefix: batch_
       initialize-schema: always
   main:
     allow-bean-definition-overriding: true
