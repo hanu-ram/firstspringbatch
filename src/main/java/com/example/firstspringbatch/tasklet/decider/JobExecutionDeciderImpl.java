@@ -1,4 +1,4 @@
-package com.example.firstspringbatch.decider;
+package com.example.firstspringbatch.tasklet.decider;
 
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.StepExecution;

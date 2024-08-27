@@ -1,28 +1,18 @@
-package com.example.firstspringbatch.config;
+package com.example.firstspringbatch.tasklet.config;
 
-import com.example.firstspringbatch.decider.JobExecutionDeciderImpl;
-import com.example.firstspringbatch.listner.BatchStepListener;
-import com.example.firstspringbatch.listner.JobStatusListener;
-import com.zaxxer.hikari.HikariDataSource;
+import com.example.firstspringbatch.tasklet.decider.JobExecutionDeciderImpl;
+import com.example.firstspringbatch.tasklet.listner.BatchStepListener;
 import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.batch.support.DatabaseType;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.sql.DataSource;
 
 @Configuration
 @AllArgsConstructor
@@ -83,6 +73,7 @@ public class BatchConfigCustomFlow {
      * @return Job
      */
     @Bean
+    @Primary
     public Job myJob() {
         return new JobBuilder("myJob", jobRepository)
                 .start(step1())

@@ -2,7 +2,7 @@ spring:
   application:
     name: firstspringbatch
   profiles:
-    active: dev
+    active: test
   batch:
     job:
       enabled: false
