@@ -1,4 +1,4 @@
-package com.example.firstspringbatch.chunkbased.controller;
+package com.example.firstspringbatch.itemreaderprac.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -6,29 +6,28 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@ConditionalOnProperty(value = "chunk.batch.enabled", havingValue = "true")
-public class ChunkBatchTriggerController {
+public class ItemBatchTriggerController {
     private final JobLauncher jobLauncher;
     private final Job job;
-    public ChunkBatchTriggerController(JobLauncher jobLauncher, @Qualifier("myChunkJob") Job job) {
-        System.out.println(job.getName());
+    public ItemBatchTriggerController(JobLauncher jobLauncher, @Qualifier("itemProcessJob") Job job) {
         this.jobLauncher = jobLauncher;
         this.job = job;
     }
-    @GetMapping("/chunkJobLauncher/{id}")
+    @GetMapping("/itemJobLauncher/{id}")
     public void launchJob(@PathVariable String id) {
-        JobParameters jobParameters = new JobParametersBuilder().addString("chunkParam", id).toJobParameters();
         try {
+            JobParameters jobParameters = new JobParametersBuilder()
+                    .addString("itemBatchProcessParam", id)
+                    .toJobParameters();
             jobLauncher.run(job, jobParameters);
         } catch (Exception e) {
-            log.error("ChunkBatchTriggerController::launchJob Exception occurred {}", e.getMessage());
+            log.error("ChunkBatchTriggerController::launchJob Exception occured {}", e.getMessage());
         }
     }
 }

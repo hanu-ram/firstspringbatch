@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@ConditionalOnProperty(value = "custom.flow.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "custom.flow.enabled", havingValue = "true")
 @AllArgsConstructor
 public class BatchConfigCustomFlow {
     JobRepository jobRepository;
