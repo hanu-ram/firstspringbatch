@@ -7,6 +7,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -17,6 +18,7 @@ import java.util.stream.IntStream;
 
 @Configuration
 @AllArgsConstructor
+@ConditionalOnProperty(value = "chunk.batch.enabled", havingValue = "true")
 public class ChunkBatchConfig {
     JobRepository jobRepository;
     PlatformTransactionManager platformTransactionManager;

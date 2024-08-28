@@ -1,7 +1,7 @@
-//package com.example.firstspringbatch.config;
+//package com.example.firstspringbatch.tasklet.config;
 //
-//import com.example.firstspringbatch.listner.BatchStepListener;
-//import com.example.firstspringbatch.listner.JobStatusListener;
+//import com.example.firstspringbatch.tasklet.listner.BatchStepListener;
+//import com.example.firstspringbatch.tasklet.listner.JobStatusListener;
 //import com.zaxxer.hikari.HikariDataSource;
 //import lombok.AllArgsConstructor;
 //import org.springframework.batch.core.Job;
@@ -13,6 +13,7 @@
 //import org.springframework.batch.core.step.builder.StepBuilder;
 //import org.springframework.batch.repeat.RepeatStatus;
 //import org.springframework.batch.support.DatabaseType;
+//import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 //import org.springframework.boot.context.properties.ConfigurationProperties;
 //import org.springframework.boot.jdbc.DataSourceBuilder;
 //import org.springframework.context.annotation.Bean;
@@ -25,6 +26,7 @@
 //
 //@Configuration
 //@AllArgsConstructor
+//@ConditionalOnProperty(value = "batch.basic.enabled", havingValue = "true")
 //@EnableBatchProcessing(dataSourceRef = "batchDataSource", transactionManagerRef = "batchTransactionManager", tablePrefix = "MY_")
 //public class BatchConfig {
 //    JobStatusListener jobStatusListener;
