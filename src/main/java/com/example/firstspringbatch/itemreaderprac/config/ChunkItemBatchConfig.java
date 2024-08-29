@@ -1,9 +1,9 @@
 package com.example.firstspringbatch.itemreaderprac.config;
 
 import com.example.firstspringbatch.itemreaderprac.domain.Product;
-import com.example.firstspringbatch.itemreaderprac.mapper.ProductRowMapper;
 import com.example.firstspringbatch.itemreaderprac.domain.StudentInfo;
 import com.example.firstspringbatch.itemreaderprac.mapper.CustomBeanFieldSetMapper;
+import com.example.firstspringbatch.itemreaderprac.mapper.ProductRowMapper;
 import com.example.firstspringbatch.itemreaderprac.writer.ConsoleItemWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -15,9 +15,6 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
-import org.springframework.batch.item.database.PagingQueryProvider;
-import org.springframework.batch.item.database.support.MySqlPagingQueryProvider;
-import org.springframework.batch.item.database.support.PostgresPagingQueryProvider;
 import org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
