@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Hanu",
+    "group": "BCA",
+    "passed_out_year": 2021,
+    "grade": "A"
+  },
+  {
+    "id": 2,
+    "name": "Sita",
+    "group": "BCA",
+    "passed_out_year": 2020,
+    "grade": "B"
+  },
+  {
+    "id": 3,
+    "name": "Arjun",
+    "group": "BSc",
+    "passed_out_year": 2021,
+    "grade": "A+"
+  },
+  {
+    "id": 4,
+    "name": "Ravi",
+    "group": "BCom",
+    "passed_out_year": 2019,
+    "grade": "B+"
+  },
+  {
+    "id": 5,
+    "name": "Lakshmi",
+    "group": "BA",
+    "passed_out_year": 2022,
+    "grade": "A"
+  },
+  {
+    "id": 6,
+    "name": "Krishna",
+    "group": "BBA",
+    "passed_out_year": 2020,
+    "grade": "A-"
+  },
+  {
+    "id": 7,
+    "name": "Meera",
+    "group": "BCA",
+    "passed_out_year": 2021,
+    "grade": "A+"
+  },
+  {
+    "id": 8,
+    "name": "Vikram",
+    "group": "BSc",
+    "passed_out_year": 2018,
+    "grade": "B"
+  },
+  {
+    "id": 9,
+    "name": "Anita",
+    "group": "BCom",
+    "passed_out_year": 2019,
+    "grade": "A"
+  },
+  {
+    "id": 10,
+    "name": "Rohan",
+    "group": "BA",
+    "passed_out_year": 2021,
+    "grade": "B+"
+  }
+]

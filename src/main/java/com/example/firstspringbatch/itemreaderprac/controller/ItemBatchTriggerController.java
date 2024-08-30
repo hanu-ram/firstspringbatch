@@ -25,6 +25,7 @@ public class ItemBatchTriggerController {
         try {
             JobParameters jobParameters = new JobParametersBuilder()
                     .addString("itemBatchProcessParam", id)
+                    .addString("inputFile", "D:\\Spring batch\\firstspringbatch\\src\\main\\resources\\files\\mockStudent.json")
                     .toJobParameters();
             jobLauncher.run(job, jobParameters);
         } catch (Exception e) {

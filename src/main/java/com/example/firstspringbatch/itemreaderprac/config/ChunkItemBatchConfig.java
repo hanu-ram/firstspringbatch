@@ -5,9 +5,12 @@ import com.example.firstspringbatch.itemreaderprac.domain.StudentInfo;
 import com.example.firstspringbatch.itemreaderprac.mapper.CustomBeanFieldSetMapper;
 import com.example.firstspringbatch.itemreaderprac.mapper.ProductRowMapper;
 import com.example.firstspringbatch.itemreaderprac.writer.ConsoleItemWriter;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
@@ -20,9 +23,15 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.batch.item.json.GsonJsonObjectReader;
+import org.springframework.batch.item.json.JacksonJsonObjectReader;
+import org.springframework.batch.item.json.JsonItemReader;
+import org.springframework.batch.item.json.builder.JsonItemReaderBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -49,11 +58,12 @@ public class ChunkItemBatchConfig {
         DefaultLineMapper<StudentInfo> lineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
-        lineTokenizer.setNames("Id","Name","Group","Passed Out Year","Grade");
+        lineTokenizer.setNames("Id", "Name", "Group", "Passed Out Year", "Grade");
         lineMapper.setLineTokenizer(lineTokenizer);
         lineMapper.setFieldSetMapper(new CustomBeanFieldSetMapper());
         return lineMapper;
     }
+
     @Bean
     public ItemReader<Product> jdbcCursorItemReader() {
         JdbcCursorItemReader<Product> jdbcCursorItemReader = new JdbcCursorItemReader<>();
@@ -79,10 +89,23 @@ public class ChunkItemBatchConfig {
     }
 
     @Bean
+    @StepScope
+    public ItemReader<StudentInfo> jsonItemReader(@Value("#{jobParameters['inputFile']}") FileSystemResource resource) throws Exception {
+        GsonJsonObjectReader<StudentInfo> gsonObjectReader = new GsonJsonObjectReader<>(StudentInfo.class);
+        gsonObjectReader.open(resource);
+        return new JsonItemReaderBuilder<StudentInfo>().resource(resource)
+                .jsonObjectReader(gsonObjectReader)
+                .name("StudentInfoJsonReader")
+                .maxItemCount(5)
+                .build();
+    }
+
+
+    @Bean
     public Step itemStep1() throws Exception {
         return new StepBuilder("itemStep1", jobRepository)
-                .<Product, Product>chunk(3, platformTransactionManager)
-                .reader(jdbcPagingItemReader())
+                .<StudentInfo, StudentInfo>chunk(3, platformTransactionManager)
+                .reader(jsonItemReader(null))
                 .writer(new ConsoleItemWriter<>())
                 .build();
     }
